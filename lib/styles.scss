@@ -1,0 +1,41 @@
+@import "variables";
+@import "mixins";
+
+
+body {
+  font-family: 'Cinzel Decorative', cursive;
+  background-color: #000000;
+  color: #fcdd55;
+}
+
+.recent-guess-section {
+  display: flex;
+  flex-direction: column;
+}
+
+p, h1 {
+  margin: 10px auto;
+}
+
+.guess-input-field {
+  @include button-style;
+  margin: auto;
+}
+
+.submit-clear-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button {
+  @include button-style;
+}
+.clear-button {
+  @include button-style;
+}
+
+.reset-button {
+  @include button-style;
+  margin: auto;
+}
