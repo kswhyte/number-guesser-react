@@ -19,20 +19,21 @@ export default class Application extends Component {
       maxRange: '',
       modifiedMin: 0,
       modifiedMax: 100
+      // rangeDefined: false
     }
   }
   componentDidMount() {
     this.randomizeNumber()
   }
   randomizeNumber() {
-    const { minRange, maxRange } = this.state
-    if (!minRange || !maxRange) {
+    const { minRange, maxRange, modifiedMin, modifiedMax, rangeDefined } = this.state
+    // if (rangeDefined === true) {
+    //   this.setState({ targetNumber: Math.floor(Math.random()
+    //     * (maxRange - minRange)) + minRange })
+    // } else {
       this.setState({ targetNumber: Math.floor(Math.random()
-        * (100 - 0)) + 0 })
-    } else {
-      this.setState({ targetNumber: Math.floor(Math.random()
-        * (maxRange - minRange)) + minRange })
-    }
+        * (modifiedMax - modifiedMin)) + modifiedMin })
+    // }
   }
 
   submitGuess() {
@@ -48,7 +49,7 @@ export default class Application extends Component {
     }
   }
   compareToMax() {
-    if (parseInt(this.state.guessValue) > this.state.maxRange) {
+    if (parseInt(this.state.guessValue) > this.state.modifiedMax) {
       this.setState({ feedbackMsg: "Your number is ABOVE the accepted range." })
       this.clearGuessInput()
     } else {
@@ -56,7 +57,7 @@ export default class Application extends Component {
     }
   }
   compareToMin() {
-    if (parseInt(this.state.guessValue) < this.state.minRange) {
+    if (parseInt(this.state.guessValue) < this.state.modifiedMin) {
       this.setState({ feedbackMsg: "Your number is BELOW the accepted range." })
       this.clearGuessInput()
     } else {
@@ -80,15 +81,23 @@ export default class Application extends Component {
     }
   }
   validateAWin() {
+    let newMin = this.state.modifiedMin - 10
+    let newMax = this.state.modifiedMax + 10
     if (parseInt(this.state.guessValue) === this.state.targetNumber) {
-      this.setState({ feedbackMsg: "~ YOU WIN!! ~" })
-      this.clearGuessInput()
-      this.randomizeNumber()
+      this.setState({
+        feedbackMsg: "~ YOU WIN!! ~",
+        minRange: '',
+        maxRange: '',
+        modifiedMin: newMin,
+        modifiedMax: newMax
+      })
+    this.clearGuessInput()
+    window.setTimeout(this.randomizeNumber(), 1000)
     }
   }
 
   updateGuessValue(e) {
-    this.setState({guessValue: e.target.value})
+    this.setState({ guessValue: e.target.value })
   }
   clearGuessInput() {
     this.setState({ guessValue: '' })
@@ -102,8 +111,9 @@ export default class Application extends Component {
       modifiedMax: 100,
       feedbackMsg: 'How lucky do you feel?',
       lastGuess: ''
+    }, () => {
+      this.randomizeNumber()
     })
-    this.randomizeNumber()
   }
   updateMinRange(e) {
     if (!isNaN(e.target.value)) {
@@ -119,8 +129,9 @@ export default class Application extends Component {
     this.setState({
       modifiedMin: this.state.minRange,
       modifiedMax: this.state.maxRange
+    }, () => {
+      this.randomizeNumber()
     })
-    this.randomizeNumber()
   }
 
   render() {
@@ -135,7 +146,7 @@ export default class Application extends Component {
     }
     return (
       <div>
-        <p className="title">Number Guesser</p>
+        <p className="title">Number <span>Guesser</span></p>
         <RecentGuess
           lastGuess={this.state.lastGuess}
           feedbackMsg={this.state.feedbackMsg}

@@ -7,14 +7,12 @@ export const GuessRange = ({ minRange, maxRange, updateMinRange, updateMaxRange,
         <input
           className="min-range-input"
           placeholder="Minimum..."
-          value={minRange}
           onChange={updateMinRange}
         >
         </input>
         <input
           className="max-range-input"
           placeholder="Maximum..."
-          value={maxRange}
           onChange={updateMaxRange}
         >
         </input>
