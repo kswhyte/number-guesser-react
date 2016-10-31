@@ -112,6 +112,7 @@ export default class Application extends Component {
     }
     return (
       <div>
+        <h2 className="title">Number Guesser</h2>
         <RecentGuess
           guessValue={this.state.guessValue}
           feedbackMsg={this.state.feedbackMsg}
