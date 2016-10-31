@@ -1,13 +1,11 @@
 import React from 'react'
 
-export const RecentGuess = () => {
+export const RecentGuess = ({ guessValue, feedbackMsg }) => {
   return (
-    <section
-      className="recent-guess-section"
-    >
+    <section className="recent-guess-section">
       <p>Your last guess was...</p>
-      <h1>X</h1>
-      <p>How lucky do you feel?</p>
+      <h1>~ {guessValue} ~</h1>
+      <p>{feedbackMsg}</p>
     </section>
   )
 }

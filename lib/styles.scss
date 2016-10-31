@@ -39,3 +39,25 @@ p, h1 {
   @include button-style;
   margin: auto;
 }
+
+.guess-range-setting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.min-range-input {
+  @include button-style;
+}
+.max-range-input {
+  @include button-style;
+}
+.submit-range-button {
+  @include button-style;
+  margin: auto;
+}
+
+// .min-max-settings {
+//   margin: 10px auto;
+//   align-items: center;
+// }
