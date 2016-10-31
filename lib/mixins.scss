@@ -1,5 +1,39 @@
 @mixin button-style {
-  margin: 10px 10px;
+  font-family: 'Cinzel Decorative', cursive;
+  margin: 15px 10px;
+  padding: 5px 13px;
   display: block;
   align-items: center;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    background-color: #f79438;
+  }
 }
+
+@mixin input-hover {
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+@mixin container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+//
+// @mixin button-style {
+//   margin: 5px;
+//   color: white;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-weight: 300;
+//   border-style: none;
+//     &:hover {
+//     cursor: pointer;
+//     }
+// }

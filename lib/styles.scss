@@ -8,14 +8,15 @@ body {
 }
 
 .title {
+  margin-top: 20px;
   text-align: center;
   font-size: 3em;
-  margin-top: 40px;
 }
 
 .recent-guess-section {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 p, h1 {
@@ -23,15 +24,19 @@ p, h1 {
   text-align: center;
 }
 
+h1 {
+  font-size: 3em;
+}
+
 .guess-input-field {
   @include button-style;
+  @include input-hover;
   margin: auto;
+  width: 150px;
 }
 
 .submit-clear-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include container;
 }
 
 .submit-button {
@@ -47,23 +52,32 @@ p, h1 {
 }
 
 .guess-range-setting {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include container;
+  margin-top: 20px;
 }
 
 .min-range-input {
   @include button-style;
+  @include input-hover;
+  width: 90px;
 }
+
 .max-range-input {
   @include button-style;
+  @include input-hover;
+  width: 90px;
 }
+
 .submit-range-button {
   @include button-style;
-  margin: auto;
+  margin: 0 auto 15px auto;
 }
 
 p.min-max-settings {
   margin: 10px auto;
   text-align: center;
+}
+
+span {
+  color: #d94f24
 }

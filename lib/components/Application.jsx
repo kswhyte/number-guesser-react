@@ -116,11 +116,11 @@ export default class Application extends Component {
     }
   }
   updateRange() {
-    this.randomizeNumber()
     this.setState({
       modifiedMin: this.state.minRange,
       modifiedMax: this.state.maxRange
     })
+    this.randomizeNumber()
   }
 
   render() {
@@ -130,13 +130,12 @@ export default class Application extends Component {
     }
     let resetButtonToggle = true
     if (this.state.lastGuess || this.state.guessValue
-      || this.state.minRange || this.state.maxRange
-    ) {
+      || this.state.minRange || this.state.maxRange) {
       resetButtonToggle = false
     }
     return (
       <div>
-        <h2 className="title">Number Guesser</h2>
+        <p className="title">Number Guesser</p>
         <RecentGuess
           lastGuess={this.state.lastGuess}
           feedbackMsg={this.state.feedbackMsg}

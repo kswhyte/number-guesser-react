@@ -27,7 +27,8 @@ export const GuessRange = ({ minRange, maxRange, updateMinRange, updateMaxRange,
       </button>
       <p
         className="min-max-settings"
-      >Minimum: {modifiedMin} & Maximum: {modifiedMax}
+      >Minimum: <span>{modifiedMin} </span>
+      & Maximum: <span>{modifiedMax}</span>
       </p>
     </section>
   )
