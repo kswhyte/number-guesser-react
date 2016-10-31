@@ -11,29 +11,33 @@ export default class Application extends Component {
   constructor() {
     super()
     this.state = {
-      targetNumber: this.randomizeNumber(),
+      targetNumber: '',
       guessValue: '',
+      lastGuess: '',
       feedbackMsg: 'How lucky do you feel?',
-      minRange: 0,
-      maxRange: 100
-      // modifiedMin: '',
-      // modifiedMax: ''
+      minRange: '',
+      maxRange: '',
+      modifiedMin: 0,
+      modifiedMax: 100
     }
   }
-  // this.state.modifiedMin ||
-  // this.state.modifiedMax ||
-
+  componentDidMount() {
+    this.randomizeNumber()
+  }
   randomizeNumber() {
-    // console.log(parseInt(this.state.minRange))
-    // console.log(parseInt(this.state.maxRange))
-    let newTarget = Math.floor(Math.random()
-    * (100 - 0)) + 0
-    // * (this.state.maxRange - this.state.minRange)) + this.state.minRange
-    return newTarget
+    const { minRange, maxRange } = this.state
+    if (!minRange || !maxRange) {
+      this.setState({ targetNumber: Math.floor(Math.random()
+        * (100 - 0)) + 0 })
+    } else {
+      this.setState({ targetNumber: Math.floor(Math.random()
+        * (maxRange - minRange)) + minRange })
+    }
   }
 
   submitGuess() {
     this.isGuessANumber()
+    this.setState({ lastGuess: this.state.guessValue })
   }
   isGuessANumber() {
     if (isNaN(parseInt(this.state.guessValue))) {
@@ -77,9 +81,9 @@ export default class Application extends Component {
   }
   validateAWin() {
     if (parseInt(this.state.guessValue) === this.state.targetNumber) {
-      this.setState({ feedbackMsg: "YOU WIN!!" })
+      this.setState({ feedbackMsg: "~ YOU WIN!! ~" })
       this.clearGuessInput()
-      this.setState({ targetNumber: this.randomizeNumber() })
+      this.randomizeNumber()
     }
   }
 
@@ -90,19 +94,33 @@ export default class Application extends Component {
     this.setState({ guessValue: '' })
   }
   resetGame() {
-    this.setState({ guessValue: '' })
-    this.setState({ minRange: 0 })
-    this.setState({ minRange: 100 })
-    this.setState({ feedbackMsg: 'How lucky do you feel?' })
+    this.setState({
+      guessValue: '',
+      minRange: '',
+      maxRange: '',
+      modifiedMin: 0,
+      modifiedMax: 100,
+      feedbackMsg: 'How lucky do you feel?',
+      lastGuess: ''
+    })
+    this.randomizeNumber()
   }
   updateMinRange(e) {
-    this.setState({ minRange: e.target.value })
+    if (!isNaN(e.target.value)) {
+    this.setState({ minRange: parseInt(e.target.value) })
+    }
   }
   updateMaxRange(e) {
-    this.setState({ maxRange: e.target.value })
+    if (!isNaN(e.target.value)) {
+    this.setState({ maxRange: parseInt(e.target.value) })
+    }
   }
   updateRange() {
-
+    this.randomizeNumber()
+    this.setState({
+      modifiedMin: this.state.minRange,
+      modifiedMax: this.state.maxRange
+    })
   }
 
   render() {
@@ -110,11 +128,17 @@ export default class Application extends Component {
     if (!this.state.guessValue) {
       buttonToggle = true
     }
+    let resetButtonToggle = true
+    if (this.state.lastGuess || this.state.guessValue
+      || this.state.minRange || this.state.maxRange
+    ) {
+      resetButtonToggle = false
+    }
     return (
       <div>
         <h2 className="title">Number Guesser</h2>
         <RecentGuess
-          guessValue={this.state.guessValue}
+          lastGuess={this.state.lastGuess}
           feedbackMsg={this.state.feedbackMsg}
         />
         <GuessInput
@@ -133,14 +157,16 @@ export default class Application extends Component {
         </div>
         <ResetButton
           resetGame={this.resetGame.bind(this)}
-          buttonToggle={buttonToggle}
+          resetButtonToggle={resetButtonToggle}
         />
         <GuessRange
           minRange={this.state.minRange}
-          updateMinRange={this.updateMinRange.bind(this)}
           maxRange={this.state.maxRange}
+          updateMinRange={this.updateMinRange.bind(this)}
           updateMaxRange={this.updateMaxRange.bind(this)}
           updateRange={this.updateRange.bind(this)}
+          modifiedMin={this.state.modifiedMin}
+          modifiedMax={this.state.modifiedMax}
         />
       </div>
     )

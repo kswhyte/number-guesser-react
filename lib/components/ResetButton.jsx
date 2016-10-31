@@ -1,11 +1,11 @@
 import React from 'react'
 
-export const ResetButton = ({ resetGame, buttonToggle }) => {
+export const ResetButton = ({ resetGame, resetButtonToggle }) => {
   return (
     <button
       className="reset-button"
       onClick={resetGame}
-      disabled={buttonToggle}
+      disabled={resetButtonToggle}
     >Reset Game
     </button>
   )
