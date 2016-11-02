@@ -19,7 +19,6 @@ export default class Application extends Component {
       maxRange: '',
       modifiedMin: 0,
       modifiedMax: 100
-      // rangeDefined: false
     }
   }
   componentDidMount() {
@@ -27,13 +26,8 @@ export default class Application extends Component {
   }
   randomizeNumber() {
     const { minRange, maxRange, modifiedMin, modifiedMax, rangeDefined } = this.state
-    // if (rangeDefined === true) {
-    //   this.setState({ targetNumber: Math.floor(Math.random()
-    //     * (maxRange - minRange)) + minRange })
-    // } else {
       this.setState({ targetNumber: Math.floor(Math.random()
         * (modifiedMax - modifiedMin)) + modifiedMin })
-    // }
   }
 
   submitGuess() {
@@ -183,19 +177,3 @@ export default class Application extends Component {
   }
 
 }
-{/* <GuessRange /> */}
-
-
-
-
-//
-// The application should have the following user interface elements:
-//
-// An input field for guessing the number
-// A button for submitting a guess
-// A button for clearing the input field
-// A button that resets the game to its initial state
-// An element that displays the users most recent guess
-// An element that displays a message to user
-// If their guess is too high, it should display: “Sorry, that guess is too high. Try a lower number.”
-// If their guess is too low, it should display: “Sorry, that guess is too low. Try a higher number.”
