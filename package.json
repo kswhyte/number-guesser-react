@@ -4,8 +4,8 @@
   "description": "A good enough starter kit for a React project, I guess.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack.js",
+    "start": "webpack-dev-server --inline --hot",
+    "build": "webpack",
     "test": "mocha --compilers js:babel/register"
   },
   "repository": {
