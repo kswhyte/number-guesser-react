@@ -5,6 +5,9 @@ Here, I re-built a small game based on the original [NumberGuesser](https://gith
 After the guess is submitted, the 'max' and 'min' were increased and decreased respectively to add a greater difficulty after each successful guess. Users were also able to customize the range at their own volition.
 
 ---
+Play the Game [here](https://kswhyte.github.io/number-guesser-react/)!
+
+---
 To install the dependencies:
 
 ```
